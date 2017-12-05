@@ -1,7 +1,7 @@
 
 let readLines φfilePath =
     let read = System.IO.File.ReadAllLines(φfilePath)
-    read.[0]
+    read
 
 let maxDiff (φstrxs : string []) =
     let intList = Array.map int φstrxs
@@ -12,14 +12,11 @@ let maxDiff (φstrxs : string []) =
 let splitUpTab (φstr :string) =
     φstr.Split('\t')
 
-let spreadSheetToLists φfilePath =
+let Advent2p1 φfilePath =
     let spread = readLines φfilePath
-    let lines = spread.Split('\n') // We split on newlines, to get each line
-    let diffs = Array.map (fun x -> maxDiff(splitUpTab x)) lines 
-    printfn "%A" diffs
+    let diffs = Array.map (fun x -> maxDiff(splitUpTab x)) spread 
+    Array.foldBack (+) diffs 0
 
-let k = "123 456 789
-123 456 789"
 
-k.Split('\n')
+printfn "Checksum: %i" (Advent2p1 "Intput1.txt")
 
